@@ -25,4 +25,4 @@ def sol input
 end
 
 mat_a = [['a','b','c'],['d','e','f'],['g','h','i']]
-print (sol mat_a)
+(sol mat_a).should_be ([["g", "d", "a"], ["h", "e", "b"], ["i", "f", "c"]])
