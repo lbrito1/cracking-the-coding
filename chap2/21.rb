@@ -1,4 +1,4 @@
-require './chap2/20'
+require './chap2/inc/20'
 require './util/test'
 
 def sol input
