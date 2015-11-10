@@ -1,20 +1,22 @@
 require './util/test'
 
-class ThreeStack
-	attr_accessor :ar, :n, :p0, :p1, :p2
+class NStack
+	attr_accessor :ar, :n, :p
 
-	def initialize n
+	def initialize i, n
+		@i = i
 		@n = n
-		@ar = Array.new 3*n
-		@p0 = 0
-		@p1 = n
-		@p2 = 2*n
+		@ar = Array.new i*n
+		@p = []
+		for k in (0..i-1)
+			@p << k*n
+		end
 	end
 
 	def push i, val
-		pos = self.send "p#{i}"
+		pos = p[i]
 		if pos < ((i+1)*@n)
-			self.send("p#{i}=", pos + 1)
+			p[i] += 1
 			@ar[pos] = val
 		else
 			nil	# stack is full
@@ -22,17 +24,17 @@ class ThreeStack
 	end
 
 	def pop i
-		pos = self.send "p#{i}"
+		pos = p[i]
 		if pos > i*@n
-			self.send("p#{i}=", pos - 1)
-			@ar[pos - 1]
+			p[i] -= 1
+			@ar[p[i]]
 		else
 			nil # stack is empty
 		end
 	end
 end
 
-x = ThreeStack.new 5
+x = NStack.new 3, 5
 for i in (0..4)
 	(x.push 0, i).should_be i
 	(x.push 2, i).should_be i
